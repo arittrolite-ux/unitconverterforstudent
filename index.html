@@ -1,228 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unit Converter For Student</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unit Converter For Student</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="hero">
-    <h1>📐 Unit Converter For Student</h1>
-    <p>Dark-style converter hub for school, college, and civil engineering. Fast conversions, reverse calculations, formulas, mini calculator, trigonometry, and practical engineering tools.</p>
-  </header>
 
-  <main class="container">
-    <div class="topbar">
-      <a class="pill" href="#converter">🔄 Converter</a>
-      <a class="pill" href="#miniCalc">🧮 Mini Calculator</a>
-      <a class="pill" href="#trig">📐 Trigonometry</a>
-      <a class="pill" href="#formulas">🧠 Formulas</a>
-      <a class="pill" href="#civil">🏗 Civil Tools</a>
-    </div>
+<header class="hero">
+<h1>📐 Unit Converter For Student</h1>
 
-    <section class="panel" id="converter">
-      <h2 class="section-title">Smart Unit Converter</h2>
-      <p class="section-subtitle">Choose a category, select units, enter a value, then convert in both directions with one tool.</p>
+<p>
+Dark-style converter hub for school, college,
+and civil engineering.
+Fast conversions, reverse calculations,
+formulas, mini calculator,
+trigonometry, and engineering tools.
+</p>
+</header>
 
-      <div class="grid">
-        <div>
-          <label for="category">Category</label>
-          <select id="category" onchange="loadUnits()"></select>
-        </div>
-        <div>
-          <label for="fromUnit">From</label>
-          <select id="fromUnit" onchange="updateHint()"></select>
-        </div>
-        <div>
-          <label for="toUnit">To</label>
-          <select id="toUnit" onchange="updateHint()"></select>
-        </div>
-        <div>
-          <label for="valueInput">Value</label>
-          <input id="valueInput" type="number" step="any" placeholder="Enter value" oninput="convertUnits()" />
-        </div>
-      </div>
+<main class="container">
 
-      <div class="btn-row">
-        <button onclick="convertUnits()">Convert</button>
-        <button class="ghost" onclick="swapUnits()">Swap Units</button>
-        <button class="ghost" onclick="clearConverter()">Clear</button>
-      </div>
+<!-- TOP NAVIGATION -->
 
-      <div class="result" id="conversionResult">Choose a unit and enter a value.</div>
-      <div class="formula-box" id="conversionFormula">Formula will appear here.</div>
-      <div class="tiny" id="conversionHint"></div>
-    </section>
+<div class="topbar">
+<a class="pill" href="#converter">🔄 Converter</a>
+<a class="pill" href="#miniCalc">🧮 Calculator</a>
+<a class="pill" href="#trig">📐 Trigonometry</a>
+<a class="pill" href="#formulas">🧠 Formulas</a>
+<a class="pill" href="#civil">🏗 Civil Tools</a>
+</div>
 
-    <section class="panel">
-      <h2 class="section-title">Quick Navigation</h2>
-      <div class="nav-grid">
-        <a class="nav-item" href="#length">📏 Length</a>
-        <a class="nav-item" href="#area">📐 Area</a>
-        <a class="nav-item" href="#volume">🧪 Volume</a>
-        <a class="nav-item" href="#mass">⚖ Mass</a>
-        <a class="nav-item" href="#pressure">🧱 Pressure</a>
-        <a class="nav-item" href="#civil">🏗 Civil Tools</a>
-      </div>
-    </section>
+<!-- UNIT CONVERTER -->
 
-    <section class="two-col">
-      <section class="panel" id="miniCalc">
-        <h2 class="section-title">Mini Calculator</h2>
-        <p class="section-subtitle">Quick math for everyday use.</p>
-        <div class="grid">
-          <div>
-            <label for="calcA">A</label>
-            <input id="calcA" type="number" step="any" placeholder="Enter A" />
-          </div>
-          <div>
-            <label for="calcB">B</label>
-            <input id="calcB" type="number" step="any" placeholder="Enter B" />
-          </div>
-        </div>
-        <div class="op-row">
-          <button onclick="simpleCalc('add')">A + B</button>
-          <button onclick="simpleCalc('sub')">A - B</button>
-          <button onclick="simpleCalc('mul')">A × B</button>
-          <button onclick="simpleCalc('div')">A ÷ B</button>
-        </div>
-        <div class="op-row" style="margin-top:10px;">
-          <button onclick="simpleCalc('pow')">A ^ B</button>
-          <button onclick="simpleCalc('mod')">A % B</button>
-          <button onclick="simpleCalc('sqrtA')">√A</button>
-          <button onclick="simpleCalc('percent')">A as % of B</button>
-        </div>
-        <div class="result" id="calcResult">Use the buttons to calculate.</div>
-      </section>
+<section class="panel" id="converter">
 
-      <section class="panel" id="trig">
-        <h2 class="section-title">Trigonometry & Angle Calculator</h2>
-        <p class="section-subtitle">Input an angle in degrees and get the basic trig values.</p>
-        <label for="angleDeg">Angle (degrees)</label>
-        <input id="angleDeg" type="number" step="any" placeholder="Example: 30" oninput="calcTrig()" />
-        <div class="btn-row">
-          <button onclick="calcTrig()">Calculate</button>
-          <button class="ghost" onclick="clearTrig()">Clear</button>
-        </div>
-        <div class="result" id="trigResult">sin, cos, and tan will appear here.</div>
-        <div class="formula-box">
-          sin θ = opposite / hypotenuse<br />
-          cos θ = adjacent / hypotenuse<br />
-          tan θ = opposite / adjacent
-        </div>
-      </section>
-    </section>
+<h2 class="section-title">
+Smart Unit Converter
+</h2>
 
-    <section class="panel" id="formulas">
-      <h2 class="section-title">Formula Section</h2>
-      <p class="section-subtitle">Useful formulas for school and civil engineering.</p>
-      <div class="formula-list">
-        <div class="formula-item"><b>Stress:</b> σ = P / A</div>
-        <div class="formula-item"><b>Strain:</b> ε = ΔL / L</div>
-        <div class="formula-item"><b>Pressure:</b> P = F / A</div>
-        <div class="formula-item"><b>Density:</b> ρ = M / V</div>
-        <div class="formula-item"><b>Concrete Volume:</b> V = L × B × H</div>
-        <div class="formula-item"><b>Steel Weight (kg/m):</b> W = D² / 162</div>
-        <div class="formula-item"><b>Angle in Radians:</b> rad = degree × π / 180</div>
-        <div class="formula-item"><b>Pythagoras:</b> c² = a² + b²</div>
-      </div>
-    </section>
+<p class="section-subtitle">
+Choose category, units and convert instantly.
+</p>
 
-    <section class="grid">
-      <section class="panel" id="length">
-        <h2 class="section-title">Length Units</h2>
-        <p class="section-subtitle">SI and British length units.</p>
-        <div class="formula-list">
-          <div class="formula-item">mm, cm, m, km, µm, nm</div>
-          <div class="formula-item">inch, foot, yard, mile, nautical mile</div>
-        </div>
-      </section>
+<div class="grid">
 
-      <section class="panel" id="area">
-        <h2 class="section-title">Area Units</h2>
-        <p class="section-subtitle">Common area conversions.</p>
-        <div class="formula-list">
-          <div class="formula-item">mm², cm², m², km²</div>
-          <div class="formula-item">in², ft², yd², acre, hectare</div>
-        </div>
-      </section>
+<div>
+<label>Category</label>
+<select id="category"
+onchange="loadUnits(); convertUnits()">
+</select>
+</div>
 
-      <section class="panel" id="volume">
-        <h2 class="section-title">Volume Units</h2>
-        <p class="section-subtitle">Common volume and capacity units.</p>
-        <div class="formula-list">
-          <div class="formula-item">mm³, cm³, m³, L, mL</div>
-          <div class="formula-item">in³, ft³, yd³, gal (US), gal (UK)</div>
-        </div>
-      </section>
+<div>
+<label>From</label>
+<select id="fromUnit"
+onchange="convertUnits()">
+</select>
+</div>
 
-      <section class="panel" id="mass">
-        <h2 class="section-title">Mass / Weight Units</h2>
-        <p class="section-subtitle">School and engineering weight units.</p>
-        <div class="formula-list">
-          <div class="formula-item">mg, g, kg, tonne</div>
-          <div class="formula-item">oz, lb, stone, short ton, long ton</div>
-        </div>
-      </section>
+<div>
+<label>To</label>
+<select id="toUnit"
+onchange="convertUnits()">
+</select>
+</div>
 
-      <section class="panel" id="pressure">
-        <h2 class="section-title">Pressure / Force / Density</h2>
-        <p class="section-subtitle">Useful for civil and mechanical calculations.</p>
-        <div class="formula-list">
-          <div class="formula-item">Pa, kPa, MPa, bar, psi</div>
-          <div class="formula-item">N, kN, lbf</div>
-          <div class="formula-item">kg/m³, lb/ft³</div>
-        </div>
-      </section>
-    </section>
+<div>
+<label>Value</label>
+<input
+id="valueInput"
+type="number"
+step="any"
+placeholder="Enter value"
+oninput="convertUnits()">
+</div>
 
-    <section class="panel" id="civil">
-      <h2 class="section-title">Civil Engineering Calculators</h2>
-      <p class="section-subtitle">Small tools that are actually useful in RCC, estimation, and site work.</p>
+</div>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Steel Weight Calculator</h3>
-          <label for="steelDia">Diameter (mm)</label>
-          <input id="steelDia" type="number" step="any" placeholder="Example: 16" />
-          <label for="steelLen">Length (m)</label>
-          <input id="steelLen" type="number" step="any" placeholder="Example: 12" />
-          <button onclick="steelWeight()">Calculate</button>
-          <div class="result" id="steelResult">Result will appear here.</div>
-          <div class="formula-box">Weight (kg) = (D² / 162) × Length</div>
-        </div>
+<div class="btn-row">
+<button onclick="convertUnits()">
+Convert
+</button>
 
-        <div class="card">
-          <h3>Concrete Volume Calculator</h3>
-          <label for="concreteL">Length (m)</label>
-          <input id="concreteL" type="number" step="any" placeholder="Length" />
-          <label for="concreteB">Breadth / Width (m)</label>
-          <input id="concreteB" type="number" step="any" placeholder="Width" />
-          <label for="concreteH">Height / Thickness (m)</label>
-          <input id="concreteH" type="number" step="any" placeholder="Thickness" />
-          <button onclick="concreteVolume()">Calculate</button>
-          <div class="result" id="concreteResult">Result will appear here.</div>
-          <div class="formula-box">Volume = L × B × H</div>
-        </div>
+<button class="ghost"
+onclick="swapUnits()">
+Swap Units
+</button>
 
-        <div class="card">
-          <h3>Brick Calculator</h3>
-          <label for="brickL">Wall Length (m)</label>
-          <input id="brickL" type="number" step="any" placeholder="Example: 10" />
-          <label for="brickH">Wall Height (m)</label>
-          <input id="brickH" type="number" step="any" placeholder="Example: 3" />
-          <label for="brickT">Wall Thickness (m)</label>
-          <input id="brickT" type="number" step="any" placeholder="Example: 0.23" />
-          <button onclick="brickCount()">Calculate</button>
-          <div class="result" id="brickResult">Result will appear here.</div>
-          <div class="formula-box">Approx. bricks = wall volume × 500</div>
-        </div>
-      </div>
+<button class="ghost"
+onclick="clearConverter()">
+Clear
+</button>
+</div>
 
-      <p class="footer-note">This is a strong base. More unit categories can be added later without changing the page layout.</p>
-    </section>
-  </main> 
-    <script src="script.js"></script>
+<div class="result"
+id="conversionResult">
+
+Choose a unit and enter a value.
+
+</div>
+
+<div class="formula-box"
+id="conversionFormula">
+
+Formula will appear here.
+
+</div>
+
+<div class="tiny"
+id="conversionHint">
+</div>
+
+</section>
+
+<!-- MINI CALCULATOR + TRIG -->
+
+<section class="two-col">
+
+<section class="panel"
+id="miniCalc">
+
+<h2 class="section-title">
+🧮 Mini Calculator
+</h2>
+
+<div class="grid">
+
+<div>
+<label>A</label>
+<input id="calcA"
+type="number"
+placeholder="Enter A">
+</div>
+
+<div>
+<label>B</label>
+<input id="calcB"
+type="number"
+placeholder="Enter B">
+</div>
+
+</div>
+
+<div class="op-row">
+
+<button onclick="simpleCalc('add')">
++
+</button>
+
+<button onclick="simpleCalc('sub')">
+−
+</button>
+
+<button onclick="simpleCalc('mul')">
+×
+</button>
+
+<button onclick="simpleCalc('div')">
+÷
+</button>
+
+<button onclick="simpleCalc('pow')">
+A^B
+</button>
+
+<button onclick="simpleCalc('sqrtA')">
+√A
+</button>
+
+</div>
+
+<div class="result"
+id="calcResult">
+
+Use calculator buttons.
+
+</div>
+
+</section>
+
+<section class="panel"
+id="trig">
+
+<h2 class="section-title">
+📐 Trigonometry
+</h2>
+
+<label>Angle (Degrees)</label>
+
+<input id="angleDeg"
+type="number"
+placeholder="Example: 30"
+oninput="calcTrig()">
+
+<div class="btn-row">
+
+<button onclick="calcTrig()">
+Calculate
+</button>
+
+<button class="ghost"
+onclick="clearTrig()">
+Clear
+</button>
+
+</div>
+
+<div class="result"
+id="trigResult">
+
+sin, cos and tan will appear here.
+
+</div>
+
+<div class="formula-box">
+
+sin θ = opposite / hypotenuse
+<br>
+
+cos θ = adjacent / hypotenuse
+<br>
+
+tan θ = opposite / adjacent
+
+</div>
+
+</section>
+
+</section>
+
+<!-- FORMULAS -->
+
+<section class="panel"
+id="formulas">
+
+<h2 class="section-title">
+🧠 Formula Section
+</h2>
+
+<div class="formula-list">
+
+<div class="formula-item">
+<b>Stress:</b> σ = P / A
+</div>
+
+<div class="formula-item">
+<b>Strain:</b> ε = ΔL / L
+</div>
+
+<div class="formula-item">
+<b>Pressure:</b> P = F / A
+</div>
+
+<div class="formula-item">
+<b>Density:</b> ρ = M / V
+</div>
+
+<div class="formula-item">
+<b>Concrete Volume:</b>
+V = L × B × H
+</div>
+
+<div class="formula-item">
+<b>Steel Weight:</b>
+W = D² / 162
+</div>
+
+<div class="formula-item">
+<b>Pythagoras:</b>
+c² = a² + b²
+</div>
+
+</div>
+
+</section>
+
+<!-- CIVIL ENGINEERING -->
+
+<section class="panel"
+id="civil">
+
+<h2 class="section-title">
+🏗 Civil Engineering Tools
+</h2>
+
+<div class="grid">
+
+<!-- STEEL -->
+
+<div class="card">
+
+<h3>Steel Weight</h3>
+
+<input id="steelDia"
+type="number"
+placeholder="Diameter (mm)">
+
+<input id="steelLen"
+type="number"
+placeholder="Length (m)">
+
+<button onclick="steelWeight()">
+Calculate
+</button>
+
+<div class="result"
+id="steelResult">
+
+Result appears here
+
+</div>
+
+</div>
+
+<!-- CONCRETE -->
+
+<div class="card">
+
+<h3>Concrete Volume</h3>
+
+<input id="concreteL"
+type="number"
+placeholder="Length">
+
+<input id="concreteB"
+type="number"
+placeholder="Width">
+
+<input id="concreteH"
+type="number"
+placeholder="Height">
+
+<button onclick="concreteVolume()">
+Calculate
+</button>
+
+<div class="result"
+id="concreteResult">
+
+Result appears here
+
+</div>
+
+</div>
+
+<!-- BRICKS -->
+
+<div class="card">
+
+<h3>Brick Calculator</h3>
+
+<input id="brickL"
+type="number"
+placeholder="Wall Length">
+
+<input id="brickH"
+type="number"
+placeholder="Wall Height">
+
+<input id="brickT"
+type="number"
+placeholder="Thickness">
+
+<button onclick="brickCount()">
+Calculate
+</button>
+
+<div class="result"
+id="brickResult">
+
+Result appears here
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
+
 </body>
 </html>
