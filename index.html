@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CM to Meter Converter for Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>CM to Meter Converter</h1>
+
+    <p>Enter centimeters:</p>
+
+    <input type="number" id="cm" placeholder="Enter cm">
+
+    <button onclick="convert()">Convert</button>
+
+    <div id="result"></div>
+
+    <hr>
+
+    <h2>Formula</h2>
+
+    <p>Meter = Centimeter ÷ 100</p>
+
+    <h2>Example</h2>
+
+    <p>250 cm ÷ 100 = 2.5 m</p>
+
+    <h2>Practice Question</h2>
+
+    <p>Convert 500 cm into meters.</p>
+</div>
+
+<script>
+function convert() {
+    let cm = document.getElementById("cm").value;
+    let meter = cm / 100;
+
+    document.getElementById("result").innerHTML =
+        cm + " cm = " + meter + " m";
+}
+</script>
+
+</body>
+</html>
