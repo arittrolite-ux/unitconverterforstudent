@@ -501,5 +501,34 @@ Periodic Table, Chemical Formulas, Reactions and Chemistry Reference.
 <div class="element noble"><span class="number">118</span><span class="symbol">Og</span><span class="name">Oganesson</span></div>
 
 </div>
+  <script>
+
+function searchElement(){
+
+let input =
+document.getElementById("elementSearch")
+.value
+.toUpperCase();
+
+let elements =
+document.getElementsByClassName("element");
+
+for(let i=0;i<elements.length;i++){
+
+let text =
+elements[i].innerText.toUpperCase();
+
+if(text.indexOf(input)>-1){
+elements[i].style.display="";
+}
+else{
+elements[i].style.display="none";
+}
+
+}
+
+}
+
+</script>
 </body>
 </html>
