@@ -206,12 +206,18 @@ alert("Invalid Expression");
 
 function sqrt(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const display =
+document.getElementById("display");
 
-document.getElementById("display").value=
+const value =
+Number(display.value);
+
+if(isNaN(value)){
+alert("Please enter a number first");
+return;
+}
+
+display.value =
 Math.sqrt(value);
 
 }
@@ -243,43 +249,55 @@ Math.pow(x,y);
 
 function sin(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const display =
+document.getElementById("display");
 
-document.getElementById("display").value=
-Math.sin(
-value*Math.PI/180
-);
+const value =
+Number(display.value);
+
+if(isNaN(value)){
+alert("Please enter a number first");
+return;
+}
+
+display.value =
+Math.sin(value * Math.PI / 180);
 
 }
 
 function cos(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const display =
+document.getElementById("display");
 
-document.getElementById("display").value=
-Math.cos(
-value*Math.PI/180
-);
+const value =
+Number(display.value);
+
+if(isNaN(value)){
+alert("Please enter a number first");
+return;
+}
+
+display.value =
+Math.cos(value * Math.PI / 180);
 
 }
 
 function tan(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const display =
+document.getElementById("display");
 
-document.getElementById("display").value=
-Math.tan(
-value*Math.PI/180
-);
+const value =
+Number(display.value);
+
+if(isNaN(value)){
+alert("Please enter a number first");
+return;
+}
+
+display.value =
+Math.tan(value * Math.PI / 180);
 
 }
 
