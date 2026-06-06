@@ -1,1 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chemistry Hub</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#020617;
+color:white;
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+}
+
+.hero{
+text-align:center;
+padding:40px 20px;
+}
+
+.chemistry-container{
+max-width:1400px;
+margin:auto;
+padding:20px;
+}
+
+h2{
+text-align:center;
+color:#60a5fa;
+margin-bottom:25px;
+}
+
+.periodic-table{
+display:grid;
+grid-template-columns:repeat(18,70px);
+gap:6px;
+justify-content:center;
+}
+
+.element{
+padding:15px;
+border-radius:15px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+.element:hover{
+transform:translateY(-5px) scale(1.05);
+}
+
+.number{
+display:block;
+font-size:12px;
+opacity:.8;
+}
+
+.symbol{
+display:block;
+font-size:30px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.name{
+display:block;
+font-size:13px;
+}
+
+.alkali{
+background:linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.alkaline{
+background:linear-gradient(135deg,#ea580c,#fb923c);
+}
+
+.metalloid{
+background:linear-gradient(135deg,#0891b2,#06b6d4);
+}
+
+.nonmetal{
+background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.halogen{
+background:linear-gradient(135deg,#7c3aed,#9333ea);
+}
+
+.noble{
+background:linear-gradient(135deg,#2563eb,#60a5fa);
+}
+
+.home-btn{
+display:inline-block;
+margin-top:15px;
+padding:10px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+.home-btn:hover{
+background:#3b82f6;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<h1>🧪 Chemistry Hub</h1>
+
+<p>
+Periodic Table, Chemical Formulas, Reactions and Chemistry Reference.
+</p>
+
+<a href="index.html" class="home-btn">
+🏠 Home
+</a>
+
+</header>
+
+<div class="chemistry-container">
+
+<h2>⚛️ Periodic Table</h2>
+
+<div class="periodic-table">
+
+<div class="element nonmetal">
+<span class="number">1</span>
+<span class="symbol">H</span>
+<span class="name">Hydrogen</span>
+</div>
+
+<div class="element noble">
+<span class="number">2</span>
+<span class="symbol">He</span>
+<span class="name">Helium</span>
+</div>
+
+<div class="element alkali">
+<span class="number">3</span>
+<span class="symbol">Li</span>
+<span class="name">Lithium</span>
+</div>
+
+<div class="element alkaline">
+<span class="number">4</span>
+<span class="symbol">Be</span>
+<span class="name">Beryllium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">5</span>
+<span class="symbol">B</span>
+<span class="name">Boron</span>
+</div>
+
+<div class="element nonmetal">
+<span class="number">6</span>
+<span class="symbol">C</span>
+<span class="name">Carbon</span>
+</div>
+
+<div class="element nonmetal">
+<span class="number">7</span>
+<span class="symbol">N</span>
+<span class="name">Nitrogen</span>
+</div>
+
+<div class="element nonmetal">
+<span class="number">8</span>
+<span class="symbol">O</span>
+<span class="name">Oxygen</span>
+</div>
+
+<div class="element halogen">
+<span class="number">9</span>
+<span class="symbol">F</span>
+<span class="name">Fluorine</span>
+</div>
+
+<div class="element noble">
+<span class="number">10</span>
+<span class="symbol">Ne</span>
+<span class="name">Neon</span>
+</div>
+  <div class="element alkali">
+<span class="number">11</span>
+<span class="symbol">Na</span>
+<span class="name">Sodium</span>
+</div>
+
+<div class="element alkaline">
+<span class="number">12</span>
+<span class="symbol">Mg</span>
+<span class="name">Magnesium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">13</span>
+<span class="symbol">Al</span>
+<span class="name">Aluminium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">14</span>
+<span class="symbol">Si</span>
+<span class="name">Silicon</span>
+</div>
+
+<div class="element nonmetal">
+<span class="number">15</span>
+<span class="symbol">P</span>
+<span class="name">Phosphorus</span>
+</div>
+
+<div class="element nonmetal">
+<span class="number">16</span>
+<span class="symbol">S</span>
+<span class="name">Sulfur</span>
+</div>
+
+<div class="element halogen">
+<span class="number">17</span>
+<span class="symbol">Cl</span>
+<span class="name">Chlorine</span>
+</div>
+
+<div class="element noble">
+<span class="number">18</span>
+<span class="symbol">Ar</span>
+<span class="name">Argon</span>
+</div>
+
+<div class="element alkali">
+<span class="number">19</span>
+<span class="symbol">K</span>
+<span class="name">Potassium</span>
+</div>
+
+<div class="element alkaline">
+<span class="number">20</span>
+<span class="symbol">Ca</span>
+<span class="name">Calcium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">21</span>
+<span class="symbol">Sc</span>
+<span class="name">Scandium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">22</span>
+<span class="symbol">Ti</span>
+<span class="name">Titanium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">23</span>
+<span class="symbol">V</span>
+<span class="name">Vanadium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">24</span>
+<span class="symbol">Cr</span>
+<span class="name">Chromium</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">25</span>
+<span class="symbol">Mn</span>
+<span class="name">Manganese</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">26</span>
+<span class="symbol">Fe</span>
+<span class="name">Iron</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">27</span>
+<span class="symbol">Co</span>
+<span class="name">Cobalt</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">28</span>
+<span class="symbol">Ni</span>
+<span class="name">Nickel</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">29</span>
+<span class="symbol">Cu</span>
+<span class="name">Copper</span>
+</div>
+
+<div class="element metalloid">
+<span class="number">30</span>
+<span class="symbol">Zn</span>
+<span class="name">Zinc</span>
+</div>
+
+</div>
+
+</div>
+  
+
+</body>
+</html>
