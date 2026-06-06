@@ -303,24 +303,28 @@ Math.tan(value * Math.PI / 180);
 
 function log(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const value = Number(document.getElementById("display").value);
 
-document.getElementById("display").value=
+if(isNaN(value)){
+alert("Invalid number");
+return;
+}
+
+document.getElementById("display").value =
 Math.log10(value);
 
 }
 
 function ln(){
 
-let value=
-parseFloat(
-document.getElementById("display").value
-);
+const value = Number(document.getElementById("display").value);
 
-document.getElementById("display").value=
+if(isNaN(value)){
+alert("Invalid number");
+return;
+}
+
+document.getElementById("display").value =
 Math.log(value);
 
 }
