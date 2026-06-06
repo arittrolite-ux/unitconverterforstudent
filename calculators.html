@@ -118,41 +118,47 @@ readonly>
 
 <div class="calc-grid">
 
+<button class="calc-btn">MR</button>
+<button class="calc-btn">MC</button>
+<button class="calc-btn">M+</button>
+<button class="calc-btn">M-</button>
+<button class="calc-btn clear" onclick="clearDisplay()">C</button>
+
 <button class="calc-btn" onclick="addValue('7')">7</button>
 <button class="calc-btn" onclick="addValue('8')">8</button>
 <button class="calc-btn" onclick="addValue('9')">9</button>
-<button class="calc-btn" onclick="addValue('/')">÷</button>
-<button class="calc-btn" onclick="clearDisplay()">C</button>
+<button class="calc-btn operator" onclick="addValue('/')">÷</button>
+<button class="calc-btn" onclick="backspace()">⌫</button>
 
 <button class="calc-btn" onclick="addValue('4')">4</button>
 <button class="calc-btn" onclick="addValue('5')">5</button>
 <button class="calc-btn" onclick="addValue('6')">6</button>
-<button class="calc-btn" onclick="addValue('*')">×</button>
+<button class="calc-btn operator" onclick="addValue('*')">×</button>
 <button class="calc-btn" onclick="addValue('(')">(</button>
 
 <button class="calc-btn" onclick="addValue('1')">1</button>
 <button class="calc-btn" onclick="addValue('2')">2</button>
 <button class="calc-btn" onclick="addValue('3')">3</button>
-<button class="calc-btn" onclick="addValue('-')">−</button>
+<button class="calc-btn operator" onclick="addValue('-')">−</button>
 <button class="calc-btn" onclick="addValue(')')">)</button>
 
 <button class="calc-btn" onclick="addValue('0')">0</button>
 <button class="calc-btn" onclick="addValue('.')">.</button>
-<button class="calc-btn" onclick="calculate()">=</button>
-<button class="calc-btn" onclick="addValue('+')">+</button>
-<button class="calc-btn" onclick="backspace()">⌫</button>
+<button class="calc-btn equal" onclick="calculate()">=</button>
+<button class="calc-btn operator" onclick="addValue('+')">+</button>
+<button class="calc-btn function" onclick="addValue('%')">%</button>
 
-<button class="calc-btn" onclick="addValue('Math.PI')">π</button>
-<button class="calc-btn" onclick="addValue('Math.E')">e</button>
-<button class="calc-btn" onclick="sqrt()">√</button>
-<button class="calc-btn" onclick="square()">x²</button>
-<button class="calc-btn" onclick="power()">xʸ</button>
+<button class="calc-btn function" onclick="addValue('Math.PI')">π</button>
+<button class="calc-btn function" onclick="addValue('Math.E')">e</button>
+<button class="calc-btn function" onclick="sqrt()">√</button>
+<button class="calc-btn function" onclick="square()">x²</button>
+<button class="calc-btn function" onclick="power()">xʸ</button>
 
-<button class="calc-btn" onclick="sin()">sin</button>
-<button class="calc-btn" onclick="cos()">cos</button>
-<button class="calc-btn" onclick="tan()">tan</button>
-<button class="calc-btn" onclick="log()">log</button>
-<button class="calc-btn" onclick="ln()">ln</button>
+<button class="calc-btn function" onclick="sin()">sin</button>
+<button class="calc-btn function" onclick="cos()">cos</button>
+<button class="calc-btn function" onclick="tan()">tan</button>
+<button class="calc-btn function" onclick="log()">log</button>
+<button class="calc-btn function" onclick="ln()">ln</button>
 
 </div>
 
