@@ -228,23 +228,7 @@ alert("Invalid Expression");
 
 }
 
-function sqrt(){
-
-const display =
-document.getElementById("display");
-
-const value =
-Number(display.value);
-
-if(isNaN(value)){
-alert("Please enter a number first");
-return;
-}
-
-display.value =
-Math.sqrt(value);
-
-}
+// Scientific functions are now handled by calculate()
 
 function square(){
 
@@ -268,88 +252,6 @@ prompt("Power");
 
 document.getElementById("display").value=
 Math.pow(x,y);
-
-}
-
-function sin(){
-
-const display =
-document.getElementById("display");
-
-const value =
-Number(display.value);
-
-if(isNaN(value)){
-alert("Please enter a number first");
-return;
-}
-
-display.value =
-Math.sin(value * Math.PI / 180);
-
-}
-
-function cos(){
-
-const display =
-document.getElementById("display");
-
-const value =
-Number(display.value);
-
-if(isNaN(value)){
-alert("Please enter a number first");
-return;
-}
-
-display.value =
-Math.cos(value * Math.PI / 180);
-
-}
-
-function tan(){
-
-const display =
-document.getElementById("display");
-
-const value =
-Number(display.value);
-
-if(isNaN(value)){
-alert("Please enter a number first");
-return;
-}
-
-display.value =
-Math.tan(value * Math.PI / 180);
-
-}
-
-function log(){
-
-const value = Number(document.getElementById("display").value);
-
-if(isNaN(value)){
-alert("Invalid number");
-return;
-}
-
-document.getElementById("display").value =
-Math.log10(value);
-
-}
-
-function ln(){
-
-const value = Number(document.getElementById("display").value);
-
-if(isNaN(value)){
-alert("Invalid number");
-return;
-}
-
-document.getElementById("display").value =
-Math.log(value);
 
 }
     document.addEventListener("keydown",function(event){
