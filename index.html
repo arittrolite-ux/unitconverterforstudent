@@ -1,226 +1,932 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit Converter For Student</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit Converter For Student</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: rgba(15, 23, 42, 0.88);
+      --panel-2: #111b2e;
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #e5eefb;
+      --muted: #9fb2cf;
+      --accent: #60a5fa;
+      --accent-2: #8b5cf6;
+      --good: #34d399;
+      --warn: #fbbf24;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
 
-<style>
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#0f172a;
-    color:white;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-header{
-    text-align:center;
-    padding:40px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-}
+    * {
+      box-sizing: border-box;
+    }
 
-h1{
-    margin:0;
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(96, 165, 250, 0.15), transparent 30%),
+        radial-gradient(circle at right, rgba(139, 92, 246, 0.12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.card{
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px 18px 28px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow);
+    }
 
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border:none;
-    border-radius:8px;
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40% -10% auto;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+      pointer-events: none;
+    }
 
-button{
-    margin-top:10px;
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#2563eb;
-    color:white;
-}
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: 0.3px;
+    }
 
-.result{
-    margin-top:15px;
-    font-size:20px;
-    font-weight:bold;
-}
+    .hero p {
+      margin: 0 auto;
+      max-width: 860px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-.formula{
-    background:#334155;
-    padding:10px;
-    border-radius:8px;
-    margin-top:10px;
-}
+    .container {
+      width: min(1220px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 22px 0 40px;
+    }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-}
-</style>
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 18px 0 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .pill:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.45);
+      background: rgba(17, 24, 39, 0.95);
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(17, 27, 46, 0.96), rgba(12, 19, 33, 0.96));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(2, 6, 23, 0.58);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(96, 165, 250, 0.7);
+    }
+
+    input::placeholder {
+      color: #7f92af;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: white;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 24px rgba(96, 165, 250, 0.25);
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .ghost {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      box-shadow: none;
+    }
+
+    .result {
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 14px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      font-size: 1.02rem;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .formula-box {
+      margin-top: 12px;
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      color: #dbeafe;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .section-subtitle {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tiny {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 13px 14px;
+      text-align: center;
+      border-radius: 16px;
+      background: rgba(17, 27, 46, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.5);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .formula-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .formula-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .inline-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    @media (max-width: 700px) {
+      .inline-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .op-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .op-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .op-row button {
+      padding: 12px 10px;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
-
 <body>
+  <header class="hero">
+    <h1>📐 Unit Converter For Student</h1>
+    <p>Dark-style converter hub for school, college, and civil engineering. Fast conversions, reverse calculations, formulas, mini calculator, trigonometry, and practical engineering tools.</p>
+  </header>
 
-<header>
-<h1>📐 Unit Converter For Student</h1>
-<p>School, College & Civil Engineering Calculations</p>
-</header>
+  <main class="container">
+    <div class="topbar">
+      <a class="pill" href="#converter">🔄 Converter</a>
+      <a class="pill" href="#miniCalc">🧮 Mini Calculator</a>
+      <a class="pill" href="#trig">📐 Trigonometry</a>
+      <a class="pill" href="#formulas">🧠 Formulas</a>
+      <a class="pill" href="#civil">🏗 Civil Tools</a>
+    </div>
 
-<div class="container">
-<div class="card">
-<h2>📚 Categories</h2>
+    <section class="panel" id="converter">
+      <h2 class="section-title">Smart Unit Converter</h2>
+      <p class="section-subtitle">Choose a category, select units, enter a value, then convert in both directions with one tool.</p>
 
-<div class="grid">
+      <div class="grid">
+        <div>
+          <label for="category">Category</label>
+          <select id="category" onchange="loadUnits()"></select>
+        </div>
+        <div>
+          <label for="fromUnit">From</label>
+          <select id="fromUnit" onchange="updateHint()"></select>
+        </div>
+        <div>
+          <label for="toUnit">To</label>
+          <select id="toUnit" onchange="updateHint()"></select>
+        </div>
+        <div>
+          <label for="valueInput">Value</label>
+          <input id="valueInput" type="number" step="any" placeholder="Enter value" oninput="convertUnits()" />
+        </div>
+      </div>
 
-<a href="#length" style="text-decoration:none; color:white;">
-<div class="formula">📏 Length Units</div>
-</a>
-    
-<a href="#weight" style="text-decoration:none; color:white;">
-<div class="formula">⚖ Weight Units</div>
-</a>
-    
-<a href="#temperature" style="text-decoration:none; color:white;">
-<div class="formula">🌡 Temperature</div>
-</a>
-    
-<div class="formula">📐 Area & Volume</div>
+      <div class="btn-row">
+        <button onclick="convertUnits()">Convert</button>
+        <button class="ghost" onclick="swapUnits()">Swap Units</button>
+        <button class="ghost" onclick="clearConverter()">Clear</button>
+      </div>
 
-<a href="#engineering" style="text-decoration:none; color:white;">
-<div class="formula">🏗 Engineering Units</div>
-</a>
-    
-<div class="formula">🧱 Civil Engineering Calculators</div>
+      <div class="result" id="conversionResult">Choose a unit and enter a value.</div>
+      <div class="formula-box" id="conversionFormula">Formula will appear here.</div>
+      <div class="tiny" id="conversionHint"></div>
+    </section>
 
-</div>
-</div>
-    
-<div class="grid">
+    <section class="panel">
+      <h2 class="section-title">Quick Navigation</h2>
+      <div class="nav-grid">
+        <a class="nav-item" href="#length">📏 Length</a>
+        <a class="nav-item" href="#area">📐 Area</a>
+        <a class="nav-item" href="#volume">🧪 Volume</a>
+        <a class="nav-item" href="#mass">⚖ Mass</a>
+        <a class="nav-item" href="#pressure">🧱 Pressure</a>
+        <a class="nav-item" href="#civil">🏗 Civil Tools</a>
+      </div>
+    </section>
 
-<div class="card" id="length">
-<h2>CM → Meter</h2>
+    <section class="two-col">
+      <section class="panel" id="miniCalc">
+        <h2 class="section-title">Mini Calculator</h2>
+        <p class="section-subtitle">Quick math for everyday use.</p>
+        <div class="grid">
+          <div>
+            <label for="calcA">A</label>
+            <input id="calcA" type="number" step="any" placeholder="Enter A" />
+          </div>
+          <div>
+            <label for="calcB">B</label>
+            <input id="calcB" type="number" step="any" placeholder="Enter B" />
+          </div>
+        </div>
+        <div class="op-row">
+          <button onclick="simpleCalc('add')">A + B</button>
+          <button onclick="simpleCalc('sub')">A - B</button>
+          <button onclick="simpleCalc('mul')">A × B</button>
+          <button onclick="simpleCalc('div')">A ÷ B</button>
+        </div>
+        <div class="op-row" style="margin-top:10px;">
+          <button onclick="simpleCalc('pow')">A ^ B</button>
+          <button onclick="simpleCalc('mod')">A % B</button>
+          <button onclick="simpleCalc('sqrtA')">√A</button>
+          <button onclick="simpleCalc('percent')">A as % of B</button>
+        </div>
+        <div class="result" id="calcResult">Use the buttons to calculate.</div>
+      </section>
 
-<input type="number" id="cm">
+      <section class="panel" id="trig">
+        <h2 class="section-title">Trigonometry & Angle Calculator</h2>
+        <p class="section-subtitle">Input an angle in degrees and get the basic trig values.</p>
+        <label for="angleDeg">Angle (degrees)</label>
+        <input id="angleDeg" type="number" step="any" placeholder="Example: 30" oninput="calcTrig()" />
+        <div class="btn-row">
+          <button onclick="calcTrig()">Calculate</button>
+          <button class="ghost" onclick="clearTrig()">Clear</button>
+        </div>
+        <div class="result" id="trigResult">sin, cos, and tan will appear here.</div>
+        <div class="formula-box">
+          sin θ = opposite / hypotenuse<br />
+          cos θ = adjacent / hypotenuse<br />
+          tan θ = opposite / adjacent
+        </div>
+      </section>
+    </section>
 
-<button onclick="cmToMeter()">Convert</button>
+    <section class="panel" id="formulas">
+      <h2 class="section-title">Formula Section</h2>
+      <p class="section-subtitle">Useful formulas for school and civil engineering.</p>
+      <div class="formula-list">
+        <div class="formula-item"><b>Stress:</b> σ = P / A</div>
+        <div class="formula-item"><b>Strain:</b> ε = ΔL / L</div>
+        <div class="formula-item"><b>Pressure:</b> P = F / A</div>
+        <div class="formula-item"><b>Density:</b> ρ = M / V</div>
+        <div class="formula-item"><b>Concrete Volume:</b> V = L × B × H</div>
+        <div class="formula-item"><b>Steel Weight (kg/m):</b> W = D² / 162</div>
+        <div class="formula-item"><b>Angle in Radians:</b> rad = degree × π / 180</div>
+        <div class="formula-item"><b>Pythagoras:</b> c² = a² + b²</div>
+      </div>
+    </section>
 
-<div class="result" id="cmResult"></div>
+    <section class="grid">
+      <section class="panel" id="length">
+        <h2 class="section-title">Length Units</h2>
+        <p class="section-subtitle">SI and British length units.</p>
+        <div class="formula-list">
+          <div class="formula-item">mm, cm, m, km, µm, nm</div>
+          <div class="formula-item">inch, foot, yard, mile, nautical mile</div>
+        </div>
+      </section>
 
-<div class="formula">
-Formula:<br>
-Meter = CM ÷ 100
-</div>
-</div>
+      <section class="panel" id="area">
+        <h2 class="section-title">Area Units</h2>
+        <p class="section-subtitle">Common area conversions.</p>
+        <div class="formula-list">
+          <div class="formula-item">mm², cm², m², km²</div>
+          <div class="formula-item">in², ft², yd², acre, hectare</div>
+        </div>
+      </section>
 
-<div class="card" id="weight">
-<h2>KG → Gram</h2>
+      <section class="panel" id="volume">
+        <h2 class="section-title">Volume Units</h2>
+        <p class="section-subtitle">Common volume and capacity units.</p>
+        <div class="formula-list">
+          <div class="formula-item">mm³, cm³, m³, L, mL</div>
+          <div class="formula-item">in³, ft³, yd³, gal (US), gal (UK)</div>
+        </div>
+      </section>
 
-<input type="number" id="kg">
+      <section class="panel" id="mass">
+        <h2 class="section-title">Mass / Weight Units</h2>
+        <p class="section-subtitle">School and engineering weight units.</p>
+        <div class="formula-list">
+          <div class="formula-item">mg, g, kg, tonne</div>
+          <div class="formula-item">oz, lb, stone, short ton, long ton</div>
+        </div>
+      </section>
 
-<button onclick="kgToGram()">Convert</button>
+      <section class="panel" id="pressure">
+        <h2 class="section-title">Pressure / Force / Density</h2>
+        <p class="section-subtitle">Useful for civil and mechanical calculations.</p>
+        <div class="formula-list">
+          <div class="formula-item">Pa, kPa, MPa, bar, psi</div>
+          <div class="formula-item">N, kN, lbf</div>
+          <div class="formula-item">kg/m³, lb/ft³</div>
+        </div>
+      </section>
+    </section>
 
-<div class="result" id="kgResult"></div>
+    <section class="panel" id="civil">
+      <h2 class="section-title">Civil Engineering Calculators</h2>
+      <p class="section-subtitle">Small tools that are actually useful in RCC, estimation, and site work.</p>
 
-<div class="formula">
-Formula:<br>
-Gram = KG × 1000
-</div>
-</div>
+      <div class="grid">
+        <div class="card">
+          <h3>Steel Weight Calculator</h3>
+          <label for="steelDia">Diameter (mm)</label>
+          <input id="steelDia" type="number" step="any" placeholder="Example: 16" />
+          <label for="steelLen">Length (m)</label>
+          <input id="steelLen" type="number" step="any" placeholder="Example: 12" />
+          <button onclick="steelWeight()">Calculate</button>
+          <div class="result" id="steelResult">Result will appear here.</div>
+          <div class="formula-box">Weight (kg) = (D² / 162) × Length</div>
+        </div>
 
-<div class="card" id="temperature">
-<h2>Celsius → Fahrenheit</h2>
-    
-<input type="number" id="celsius">
+        <div class="card">
+          <h3>Concrete Volume Calculator</h3>
+          <label for="concreteL">Length (m)</label>
+          <input id="concreteL" type="number" step="any" placeholder="Length" />
+          <label for="concreteB">Breadth / Width (m)</label>
+          <input id="concreteB" type="number" step="any" placeholder="Width" />
+          <label for="concreteH">Height / Thickness (m)</label>
+          <input id="concreteH" type="number" step="any" placeholder="Thickness" />
+          <button onclick="concreteVolume()">Calculate</button>
+          <div class="result" id="concreteResult">Result will appear here.</div>
+          <div class="formula-box">Volume = L × B × H</div>
+        </div>
 
-<button onclick="cToF()">Convert</button>
+        <div class="card">
+          <h3>Brick Calculator</h3>
+          <label for="brickL">Wall Length (m)</label>
+          <input id="brickL" type="number" step="any" placeholder="Example: 10" />
+          <label for="brickH">Wall Height (m)</label>
+          <input id="brickH" type="number" step="any" placeholder="Example: 3" />
+          <label for="brickT">Wall Thickness (m)</label>
+          <input id="brickT" type="number" step="any" placeholder="Example: 0.23" />
+          <button onclick="brickCount()">Calculate</button>
+          <div class="result" id="brickResult">Result will appear here.</div>
+          <div class="formula-box">Approx. bricks = wall volume × 500</div>
+        </div>
+      </div>
 
-<div class="result" id="tempResult"></div>
+      <p class="footer-note">This is a strong base. More unit categories can be added later without changing the page layout.</p>
+    </section>
+  </main>
 
-<div class="formula">
-Formula:<br>
-°F = (°C × 9/5) + 32
-</div>
-</div>
+  <script>
+    const UNIT_DATA = {
+      length: {
+        label: "Length",
+        base: "m",
+        units: {
+          mm: { name: "Millimeter", toBase: v => v / 1000, fromBase: v => v * 1000 },
+          cm: { name: "Centimeter", toBase: v => v / 100, fromBase: v => v * 100 },
+          m: { name: "Meter", toBase: v => v, fromBase: v => v },
+          km: { name: "Kilometer", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          um: { name: "Micrometer", toBase: v => v / 1000000, fromBase: v => v * 1000000 },
+          nm: { name: "Nanometer", toBase: v => v / 1000000000, fromBase: v => v * 1000000000 },
+          in: { name: "Inch", toBase: v => v * 0.0254, fromBase: v => v / 0.0254 },
+          ft: { name: "Foot", toBase: v => v * 0.3048, fromBase: v => v / 0.3048 },
+          yd: { name: "Yard", toBase: v => v * 0.9144, fromBase: v => v / 0.9144 },
+          mi: { name: "Mile", toBase: v => v * 1609.344, fromBase: v => v / 1609.344 },
+          nmi: { name: "Nautical Mile", toBase: v => v * 1852, fromBase: v => v / 1852 }
+        }
+      },
+      area: {
+        label: "Area",
+        base: "m2",
+        units: {
+          mm2: { name: "Square Millimeter", toBase: v => v / 1000000, fromBase: v => v * 1000000 },
+          cm2: { name: "Square Centimeter", toBase: v => v / 10000, fromBase: v => v * 10000 },
+          m2: { name: "Square Meter", toBase: v => v, fromBase: v => v },
+          km2: { name: "Square Kilometer", toBase: v => v * 1000000, fromBase: v => v / 1000000 },
+          in2: { name: "Square Inch", toBase: v => v * 0.00064516, fromBase: v => v / 0.00064516 },
+          ft2: { name: "Square Foot", toBase: v => v * 0.09290304, fromBase: v => v / 0.09290304 },
+          yd2: { name: "Square Yard", toBase: v => v * 0.83612736, fromBase: v => v / 0.83612736 },
+          acre: { name: "Acre", toBase: v => v * 4046.8564224, fromBase: v => v / 4046.8564224 },
+          ha: { name: "Hectare", toBase: v => v * 10000, fromBase: v => v / 10000 }
+        }
+      },
+      volume: {
+        label: "Volume",
+        base: "m3",
+        units: {
+          mm3: { name: "Cubic Millimeter", toBase: v => v / 1000000000, fromBase: v => v * 1000000000 },
+          cm3: { name: "Cubic Centimeter", toBase: v => v / 1000000, fromBase: v => v * 1000000 },
+          m3: { name: "Cubic Meter", toBase: v => v, fromBase: v => v },
+          l: { name: "Liter", toBase: v => v / 1000, fromBase: v => v * 1000 },
+          ml: { name: "Milliliter", toBase: v => v / 1000000, fromBase: v => v * 1000000 },
+          in3: { name: "Cubic Inch", toBase: v => v * 0.000016387064, fromBase: v => v / 0.000016387064 },
+          ft3: { name: "Cubic Foot", toBase: v => v * 0.028316846592, fromBase: v => v / 0.028316846592 },
+          yd3: { name: "Cubic Yard", toBase: v => v * 0.764554857984, fromBase: v => v / 0.764554857984 },
+          galUS: { name: "US Gallon", toBase: v => v * 0.003785411784, fromBase: v => v / 0.003785411784 },
+          galUK: { name: "UK Gallon", toBase: v => v * 0.00454609, fromBase: v => v / 0.00454609 }
+        }
+      },
+      mass: {
+        label: "Mass",
+        base: "kg",
+        units: {
+          mg: { name: "Milligram", toBase: v => v / 1000000, fromBase: v => v * 1000000 },
+          g: { name: "Gram", toBase: v => v / 1000, fromBase: v => v * 1000 },
+          kg: { name: "Kilogram", toBase: v => v, fromBase: v => v },
+          tonne: { name: "Metric Ton", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          oz: { name: "Ounce", toBase: v => v * 0.028349523125, fromBase: v => v / 0.028349523125 },
+          lb: { name: "Pound", toBase: v => v * 0.45359237, fromBase: v => v / 0.45359237 },
+          st: { name: "Stone", toBase: v => v * 6.35029318, fromBase: v => v / 6.35029318 },
+          shortton: { name: "Short Ton (US)", toBase: v => v * 907.18474, fromBase: v => v / 907.18474 },
+          longton: { name: "Long Ton (UK)", toBase: v => v * 1016.0469088, fromBase: v => v / 1016.0469088 }
+        }
+      },
+      temperature: {
+        label: "Temperature",
+        units: {
+          c: { name: "Celsius" },
+          f: { name: "Fahrenheit" },
+          k: { name: "Kelvin" }
+        }
+      },
+      speed: {
+        label: "Speed",
+        base: "mps",
+        units: {
+          mps: { name: "m/s", toBase: v => v, fromBase: v => v },
+          kph: { name: "km/h", toBase: v => v / 3.6, fromBase: v => v * 3.6 },
+          mph: { name: "mph", toBase: v => v * 0.44704, fromBase: v => v / 0.44704 },
+          knot: { name: "knot", toBase: v => v * 0.514444, fromBase: v => v / 0.514444 }
+        }
+      },
+      pressure: {
+        label: "Pressure",
+        base: "pa",
+        units: {
+          pa: { name: "Pascal", toBase: v => v, fromBase: v => v },
+          kpa: { name: "kPa", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          mpa: { name: "MPa", toBase: v => v * 1000000, fromBase: v => v / 1000000 },
+          bar: { name: "Bar", toBase: v => v * 100000, fromBase: v => v / 100000 },
+          psi: { name: "PSI", toBase: v => v * 6894.757293168, fromBase: v => v / 6894.757293168 }
+        }
+      },
+      force: {
+        label: "Force",
+        base: "n",
+        units: {
+          n: { name: "Newton", toBase: v => v, fromBase: v => v },
+          kn: { name: "Kilonewton", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          lbf: { name: "Pound-force", toBase: v => v * 4.4482216152605, fromBase: v => v / 4.4482216152605 }
+        }
+      },
+      density: {
+        label: "Density",
+        base: "kgm3",
+        units: {
+          kgm3: { name: "kg/m³", toBase: v => v, fromBase: v => v },
+          gcm3: { name: "g/cm³", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          lbft3: { name: "lb/ft³", toBase: v => v * 16.01846337396, fromBase: v => v / 16.01846337396 }
+        }
+      },
+      energy: {
+        label: "Energy",
+        base: "j",
+        units: {
+          j: { name: "Joule", toBase: v => v, fromBase: v => v },
+          kj: { name: "Kilojoule", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          wh: { name: "Watt-hour", toBase: v => v * 3600, fromBase: v => v / 3600 },
+          kwh: { name: "Kilowatt-hour", toBase: v => v * 3600000, fromBase: v => v / 3600000 },
+          cal: { name: "Calorie", toBase: v => v * 4.184, fromBase: v => v / 4.184 }
+        }
+      },
+      power: {
+        label: "Power",
+        base: "w",
+        units: {
+          w: { name: "Watt", toBase: v => v, fromBase: v => v },
+          kw: { name: "Kilowatt", toBase: v => v * 1000, fromBase: v => v / 1000 },
+          hp: { name: "Horsepower", toBase: v => v * 745.699872, fromBase: v => v / 745.699872 }
+        }
+      },
+      angle: {
+        label: "Angle",
+        units: {
+          deg: { name: "Degree" },
+          rad: { name: "Radian" },
+          grad: { name: "Gradian" }
+        }
+      }
+    };
 
-<div class="card" id="engineering">
-<h2>MPa → PSI</h2>
+    const categorySelect = document.getElementById("category");
+    const fromUnitSelect = document.getElementById("fromUnit");
+    const toUnitSelect = document.getElementById("toUnit");
+    const conversionResult = document.getElementById("conversionResult");
+    const conversionFormula = document.getElementById("conversionFormula");
+    const conversionHint = document.getElementById("conversionHint");
 
-<input type="number" id="mpa">
+    function buildCategoryOptions() {
+      categorySelect.innerHTML = Object.keys(UNIT_DATA)
+        .map(key => `<option value="${key}">${UNIT_DATA[key].label}</option>`)
+        .join("");
+    }
 
-<button onclick="mpaToPsi()">Convert</button>
+    function buildUnitOptions(categoryKey) {
+      const category = UNIT_DATA[categoryKey];
+      const keys = Object.keys(category.units);
+      const options = keys.map(key => `<option value="${key}">${category.units[key].name}</option>`).join("");
+      fromUnitSelect.innerHTML = options;
+      toUnitSelect.innerHTML = options;
+      if (keys.length > 1) {
+        toUnitSelect.selectedIndex = 1;
+      }
+    }
 
-<div class="result" id="mpaResult"></div>
+    function loadUnits() {
+      buildUnitOptions(categorySelect.value);
+      updateHint();
+      convertUnits();
+    }
 
-<div class="formula">
-Formula:<br>
-PSI = MPa × 145.038
-</div>
-</div>
+    function getSelectedUnits() {
+      const category = UNIT_DATA[categorySelect.value];
+      return {
+        categoryKey: categorySelect.value,
+        category,
+        fromKey: fromUnitSelect.value,
+        toKey: toUnitSelect.value,
+        fromUnit: category.units[fromUnitSelect.value],
+        toUnit: category.units[toUnitSelect.value]
+      };
+    }
 
-</div>
+    function formatNumber(value) {
+      if (!isFinite(value)) return "—";
+      if (Math.abs(value) >= 1000000 || (Math.abs(value) > 0 && Math.abs(value) < 0.0001)) {
+        return value.toExponential(6);
+      }
+      return Number(value.toFixed(6)).toString();
+    }
 
-<div class="card">
-<h2>Engineering Formula Section</h2>
+    function updateHint() {
+      const { categoryKey, fromKey, toKey } = getSelectedUnits();
+      if (categoryKey === "temperature") {
+        conversionHint.textContent = "Temperature uses special formulas. Reverse conversion works automatically.";
+        return;
+      }
+      if (categoryKey === "angle") {
+        conversionHint.textContent = "Angle conversions: degree, radian, and gradian.";
+        return;
+      }
+      conversionHint.textContent = `Reverse conversion available: ${toKey.toUpperCase()} back to ${fromKey.toUpperCase()} using the same dropdowns.`;
+    }
 
-<p><b>Stress:</b> σ = P / A</p>
+    function convertTemperature(value, from, to) {
+      let c;
+      if (from === "c") c = value;
+      else if (from === "f") c = (value - 32) * 5 / 9;
+      else c = value - 273.15;
 
-<p><b>Strain:</b> ε = ΔL / L</p>
+      if (to === "c") return c;
+      if (to === "f") return (c * 9 / 5) + 32;
+      return c + 273.15;
+    }
 
-<p><b>Density:</b> ρ = M / V</p>
+    function convertAngle(value, from, to) {
+      let deg;
+      if (from === "deg") deg = value;
+      else if (from === "rad") deg = value * 180 / Math.PI;
+      else deg = value * 0.9;
 
-<p><b>Concrete Volume:</b> V = L × B × H</p>
+      if (to === "deg") return deg;
+      if (to === "rad") return deg * Math.PI / 180;
+      return deg / 0.9;
+    }
 
-<p><b>Unit Weight:</b> γ = W / V</p>
+    function convertUnits() {
+      const raw = document.getElementById("valueInput").value;
+      if (raw === "") {
+        conversionResult.textContent = "Enter a value to convert.";
+        conversionFormula.textContent = "Formula will appear here.";
+        return;
+      }
 
-<p><b>Pressure:</b> P = F / A</p>
-</div>
+      const value = Number(raw);
+      const { categoryKey, fromKey, toKey, fromUnit, toUnit } = getSelectedUnits();
+      if (!isFinite(value)) {
+        conversionResult.textContent = "Please enter a valid number.";
+        return;
+      }
 
-</div>
+      let output;
+      let formulaText = "";
 
-<script>
+      if (categoryKey === "temperature") {
+        output = convertTemperature(value, fromKey, toKey);
+        formulaText = `Temperature conversion: ${fromUnit.name} → ${toUnit.name}`;
+      } else if (categoryKey === "angle") {
+        output = convertAngle(value, fromKey, toKey);
+        formulaText = `Angle conversion: ${fromUnit.name} → ${toUnit.name}`;
+      } else {
+        const baseValue = fromUnit.toBase(value);
+        output = toUnit.fromBase(baseValue);
+        formulaText = `${fromUnit.name} → base unit → ${toUnit.name}`;
+      }
 
-function cmToMeter(){
-let cm=document.getElementById("cm").value;
-document.getElementById("cmResult").innerHTML=
-(cm/100)+" m";
-}
+      conversionResult.innerHTML = `<b>${formatNumber(value)}</b> ${fromUnit.name} = <b>${formatNumber(output)}</b> ${toUnit.name}`;
+      conversionFormula.textContent = formulaText;
+      updateHint();
+    }
 
-function kgToGram(){
-let kg=document.getElementById("kg").value;
-document.getElementById("kgResult").innerHTML=
-(kg*1000)+" g";
-}
+    function swapUnits() {
+      const fromIndex = fromUnitSelect.selectedIndex;
+      fromUnitSelect.selectedIndex = toUnitSelect.selectedIndex;
+      toUnitSelect.selectedIndex = fromIndex;
+      convertUnits();
+    }
 
-function cToF(){
-let c=document.getElementById("celsius").value;
-document.getElementById("tempResult").innerHTML=
-((c*9/5)+32)+" °F";
-}
+    function clearConverter() {
+      document.getElementById("valueInput").value = "";
+      conversionResult.textContent = "Choose a unit and enter a value.";
+      conversionFormula.textContent = "Formula will appear here.";
+      conversionHint.textContent = "";
+    }
 
-function mpaToPsi(){
-let m=document.getElementById("mpa").value;
-document.getElementById("mpaResult").innerHTML=
-(m*145.038).toFixed(2)+" psi";
-}
+    function simpleCalc(op) {
+      const a = Number(document.getElementById("calcA").value);
+      const b = Number(document.getElementById("calcB").value);
+      const out = document.getElementById("calcResult");
 
-</script>
+      if (op === "sqrtA") {
+        if (!isFinite(a) || a < 0) return out.textContent = "Enter a non-negative number in A.";
+        return out.innerHTML = `√${a} = <b>${Math.sqrt(a).toFixed(6)}</b>`;
+      }
 
+      if (!isFinite(a) || !isFinite(b)) {
+        out.textContent = "Enter numbers in A and B.";
+        return;
+      }
+
+      let result;
+      let label;
+      switch (op) {
+        case "add": result = a + b; label = "+"; break;
+        case "sub": result = a - b; label = "-"; break;
+        case "mul": result = a * b; label = "×"; break;
+        case "div":
+          if (b === 0) return out.textContent = "Division by zero is not allowed.";
+          result = a / b; label = "÷"; break;
+        case "pow": result = Math.pow(a, b); label = "^"; break;
+        case "mod":
+          if (b === 0) return out.textContent = "Modulo by zero is not allowed.";
+          result = a % b; label = "%"; break;
+        case "percent":
+          if (b === 0) return out.textContent = "Percentage of zero is not allowed.";
+          result = (a / b) * 100; label = "% of"; break;
+        default: return;
+      }
+      out.innerHTML = `<b>${a}</b> ${label} <b>${b}</b> = <b>${formatNumber(result)}</b>`;
+    }
+
+    function calcTrig() {
+      const angle = Number(document.getElementById("angleDeg").value);
+      const out = document.getElementById("trigResult");
+      if (!isFinite(angle)) {
+        out.textContent = "Enter an angle in degrees.";
+        return;
+      }
+      const rad = angle * Math.PI / 180;
+      const sin = Math.sin(rad);
+      const cos = Math.cos(rad);
+      const tan = Math.tan(rad);
+      out.innerHTML =
+        `sin(${angle}°) = <b>${formatNumber(sin)}</b><br>` +
+        `cos(${angle}°) = <b>${formatNumber(cos)}</b><br>` +
+        `tan(${angle}°) = <b>${Math.abs(cos) < 1e-12 ? 'undefined' : formatNumber(tan)}</b>`;
+    }
+
+    function clearTrig() {
+      document.getElementById("angleDeg").value = "";
+      document.getElementById("trigResult").textContent = "sin, cos, and tan will appear here.";
+    }
+
+    function steelWeight() {
+      const d = Number(document.getElementById("steelDia").value);
+      const l = Number(document.getElementById("steelLen").value);
+      const out = document.getElementById("steelResult");
+      if (!isFinite(d) || !isFinite(l) || d <= 0 || l <= 0) {
+        out.textContent = "Enter valid diameter and length.";
+        return;
+      }
+      const weight = ((d * d) / 162) * l;
+      out.innerHTML = `Steel Weight = <b>${weight.toFixed(2)} kg</b>`;
+    }
+
+    function concreteVolume() {
+      const l = Number(document.getElementById("concreteL").value);
+      const b = Number(document.getElementById("concreteB").value);
+      const h = Number(document.getElementById("concreteH").value);
+      const out = document.getElementById("concreteResult");
+      if (![l, b, h].every(v => isFinite(v) && v > 0)) {
+        out.textContent = "Enter valid dimensions.";
+        return;
+      }
+      const volume = l * b * h;
+      out.innerHTML = `Concrete Volume = <b>${volume.toFixed(3)} m³</b>`;
+    }
+
+    function brickCount() {
+      const l = Number(document.getElementById("brickL").value);
+      const h = Number(document.getElementById("brickH").value);
+      const t = Number(document.getElementById("brickT").value);
+      const out = document.getElementById("brickResult");
+      if (![l, h, t].every(v => isFinite(v) && v > 0)) {
+        out.textContent = "Enter valid wall dimensions.";
+        return;
+      }
+      const wallVolume = l * h * t;
+      const bricks = wallVolume * 500;
+      out.innerHTML = `Approx. Bricks = <b>${Math.ceil(bricks)}</b>`;
+    }
+
+    buildCategoryOptions();
+    buildUnitOptions(categorySelect.value);
+    updateHint();
+    conversionResult.textContent = "Choose a unit and enter a value.";
+  </script>
 </body>
 </html>
