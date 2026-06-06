@@ -305,6 +305,27 @@ document.getElementById("display").value=
 Math.log(value);
 
 }
+    document.addEventListener("keydown",function(event){
+
+const key=event.key;
+
+if("0123456789+-*/().%".includes(key)){
+addValue(key);
+}
+
+if(key==="Enter"){
+calculate();
+}
+
+if(key==="Backspace"){
+backspace();
+}
+
+if(key==="Escape"){
+clearDisplay();
+}
+
+});
 
 </script>
 
