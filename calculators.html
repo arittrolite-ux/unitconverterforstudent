@@ -149,18 +149,17 @@ readonly>
 <button class="calc-btn operator" onclick="addValue('+')">+</button>
 <button class="calc-btn function" onclick="addValue('%')">%</button>
 
-<button class="calc-btn function" onclick="addValue('Math.PI')">π</button>
-<button class="calc-btn function" onclick="addValue('Math.E')">e</button>
-<button class="calc-btn function" onclick="sqrt()">√</button>
+<button class="calc-btn function" onclick="addValue('3.14159')">π</button>
+<button class="calc-btn function" onclick="addValue('2.71828')">e</button>
 <button class="calc-btn function" onclick="square()">x²</button>
 <button class="calc-btn function" onclick="power()">xʸ</button>
 
-<button class="calc-btn function" onclick="sin()">sin</button>
-<button class="calc-btn function" onclick="cos()">cos</button>
-<button class="calc-btn function" onclick="tan()">tan</button>
-<button class="calc-btn function" onclick="log()">log</button>
-<button class="calc-btn function" onclick="ln()">ln</button>
-
+<button class="calc-btn function" onclick="addValue('sqrt(')">√</button>
+<button class="calc-btn function" onclick="addValue('sin(')">sin</button>
+<button class="calc-btn function" onclick="addValue('cos(')">cos</button>
+<button class="calc-btn function" onclick="addValue('tan(')">tan</button>
+<button class="calc-btn function" onclick="addValue('log(')">log</button>
+<button class="calc-btn function" onclick="addValue('ln(')">ln</button>
 </div>
 
 </div>
@@ -187,12 +186,37 @@ display.value.slice(0,-1);
 
 function calculate(){
 
+let expression =
+document.getElementById("display").value;
+
+expression =
+expression.replace(/sin\((.*?)\)/g,
+(_,x)=>Math.sin(x*Math.PI/180));
+
+expression =
+expression.replace(/cos\((.*?)\)/g,
+(_,x)=>Math.cos(x*Math.PI/180));
+
+expression =
+expression.replace(/tan\((.*?)\)/g,
+(_,x)=>Math.tan(x*Math.PI/180));
+
+expression =
+expression.replace(/sqrt\((.*?)\)/g,
+(_,x)=>Math.sqrt(x));
+
+expression =
+expression.replace(/log\((.*?)\)/g,
+(_,x)=>Math.log10(x));
+
+expression =
+expression.replace(/ln\((.*?)\)/g,
+(_,x)=>Math.log(x));
+
 try{
 
-document.getElementById("display").value=
-eval(
-document.getElementById("display").value
-);
+document.getElementById("display").value =
+eval(expression);
 
 }
 
